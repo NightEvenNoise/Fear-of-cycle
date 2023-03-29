@@ -1,0 +1,95 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyf168l6wvje7"]
+
+[ext_resource type="Script" path="res://scenes/menu.gd" id="1_davb0"]
+
+[sub_resource type="Gradient" id="Gradient_5h06i"]
+colors = PackedColorArray(0, 0, 0, 1, 0.0901961, 0.470588, 0.470588, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tdtag"]
+gradient = SubResource("Gradient_5h06i")
+fill = 1
+fill_from = Vector2(0.527523, 0.522936)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ys5yb"]
+font_size = 64
+outline_size = 10
+outline_color = Color(0, 0.701961, 0.690196, 1)
+shadow_size = 20
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_davb0")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_tdtag")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Fear of cycle"
+label_settings = SubResource("LabelSettings_ys5yb")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -130.0
+offset_right = 310.0
+offset_bottom = 130.0
+grow_vertical = 2
+
+[node name="Play" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+text = "Play"
+
+[node name="Settings" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+
+[node name="Exit" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Exit"
+
+[connection signal="pressed" from="Control/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Control/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Control/Exit" to="." method="_on_exit_pressed"]

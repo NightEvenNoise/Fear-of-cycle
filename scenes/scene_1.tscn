@@ -1,0 +1,52 @@
+[gd_scene load_steps=12 format=3 uid="uid://cfwbqxxcv0wo1"]
+
+[ext_resource type="Script" path="res://scenes/scene_1.gd" id="1_a6a2l"]
+[ext_resource type="PackedScene" uid="uid://2oxdgu03lnbk" path="res://player/main/player.tscn" id="1_bklmc"]
+[ext_resource type="Texture2D" uid="uid://pxr2fucxv4so" path="res://textures/coast_sand_rocks/coast_sand_rocks_02_diff_4k.jpg" id="2_shwgo"]
+[ext_resource type="Texture2D" uid="uid://dxe2c7d4txb4c" path="res://textures/coast_sand_rocks/coast_sand_rocks_02_nor_dx_4k.jpg" id="3_glkbs"]
+[ext_resource type="Texture2D" uid="uid://unxr1mrfx7ry" path="res://textures/coast_sand_rocks/coast_sand_rocks_02_rough_4k.jpg" id="4_fyqxh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wda73"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3jygj"]
+albedo_texture = ExtResource("2_shwgo")
+roughness = 0.5
+roughness_texture = ExtResource("4_fyqxh")
+normal_enabled = true
+normal_scale = 2.0
+normal_texture = ExtResource("3_glkbs")
+uv1_scale = Vector3(500, 500, 500)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vs02v"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ko4l5"]
+
+[sub_resource type="Sky" id="Sky_263t8"]
+sky_material = SubResource("ProceduralSkyMaterial_ko4l5")
+
+[sub_resource type="Environment" id="Environment_lehme"]
+background_mode = 2
+sky = SubResource("Sky_263t8")
+tonemap_mode = 2
+
+[node name="Scene1" type="Node3D"]
+script = ExtResource("1_a6a2l")
+
+[node name="Player" parent="." instance=ExtResource("1_bklmc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16927, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(600, 0, 0, 0, 0.1, 0, 0, 0, 600, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_wda73")
+surface_material_override/0 = SubResource("StandardMaterial3D_3jygj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_vs02v")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lehme")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.354781, 0.93495, 0, -0.93495, -0.354781, 0, 0, 0)
